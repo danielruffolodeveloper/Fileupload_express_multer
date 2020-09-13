@@ -98,5 +98,14 @@ app.post('/upload/multifile', upload.array('file', 10),(req, res, next) => {
   })
   ```
 
+  #### Post files to the endpoints 
+  In order to post files to our endpoints, we will need to either make a post request with Multipart as our body or alternatively, use a tool such as Postman or Insomnia
+  to build the post request without the need to set up a html form and so on.
+  Using Insomnia, make a POST request and set the body type to Multipart. Then add a property called file and set the value type as file. Now select a file to upload and make the post request.
+  
+  You should see a response on the right similar to this.
+  ![Alt text](img/1.png?raw=true)
+  the same process is followed for multiple files, only difference being that you add multiple file propertys to the body of your request
+
 
 
