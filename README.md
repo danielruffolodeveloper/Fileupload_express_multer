@@ -105,7 +105,8 @@ app.post('/upload/multifile', upload.array('file', 10),(req, res, next) => {
   
   You should see a response on the right similar to this.
   ![Alt text](img/1.png?raw=true)
-  the same process is followed for multiple files, only difference being that you add multiple file propertys to the body of your request
+  #### Note
+  The same process is followed for multiple files, only difference being that you add multiple file propertys to the body of your request
 
 
 
