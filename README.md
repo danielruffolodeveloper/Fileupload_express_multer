@@ -1,4 +1,4 @@
-# fileupload_express_multer
+# File Upload using Express.js and Multer
 An example of how to implement file upload using express.js endpoints and multer
 
 In this tutorial, We will look at how to build a file upload endpoint with Express.js. Fileupload is a important skill to learn as a web developer as it is a common feature in many applications built today. This endpoint can serve as a foundation to integrating with cloud providers such as GCP and AWS file upload services as this tutorial is very similar.
@@ -8,10 +8,9 @@ We first need to create a Node.js application. To do this, make a project folder
 run the command <strong>npm init </strong> and follow the prompts. Make sure you point your file to server.js
 
 We then need to install some dependencies using the npm package manager.These are:
-- First item
-- Second item
-- Third item
-- Fourth item
+- Express
+- Morgan
+- Multer
        
 Our <strong>package.json</strong> file should now look something like this:
 ```
