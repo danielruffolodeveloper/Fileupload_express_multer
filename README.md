@@ -1,11 +1,11 @@
 # File Upload using Express.js and Multer
-An example of how to implement file upload using express.js endpoints and multer
+An example of how to implementfile upload using Express.js and Multer
 
 In this tutorial, We will look at how to implement file upload with Express.js. Fileupload is a important skill to learn as a web developer as it is a common feature in many applications built today. 
 
 ## Getting Started.
 We first need to create a Node.js application. To do this, make a project folder and using terminal.
-run the command <strong>npm init </strong> and follow the prompts. Make sure you point your file to server.js.
+run the command <strong>npm init</strong> and follow the prompts. Make sure you point your file to server.js.
 
 We then need to install some dependencies using the npm package manager.These are:
 - Express
@@ -35,7 +35,7 @@ Our <strong>package.json</strong> file should now look something like this:
 You can go ahead and modify the package.json to suit your needs. For example, you might like to add a test script or a start script that runs nodemon,just run npm install to make the changes permanent and install any dependencies added.
 
 ## Setting up Express Server
-For our application, we will use the express template (here) and modify it to have 2 endpoints which are `/upload/singlefile` and `/upload/multifile` which respectfully is for uploading a single file or uploading an array of files.
+For our application, we will use the express template found on their website and modify it to have 2 endpoints which are `/upload/singlefile` and `/upload/multifile` which is for uploading a single file or uploading an array of files.
 
 ### Multer Package
 If you look closely at the endpoint, You will notice a method defined within the endpoint called `upload.single` and `upload.multiple`.  this is what calls the multer package every time we request a endpoint and you will see that we told multer to send files to a destination of 'uploads/' in the multer declaration. Multer is then responsible for moving the file from the request body into our defined uploads directory.
@@ -55,12 +55,12 @@ app.get('/', (req, res) => {
   res.send('File Upload Tutorial')
 })
 
-app.post('/upload/singlefile', upload.single('file'), function (req, res, next) {
+app.post('/upload/singlefile', upload.single('file'), (req, res, next) => {
     console.log(req.file)
     res.status(200).send(`File Uploaded: ${req.file.originalname}` )
   })
 
-app.post('/upload/multifile', upload.array('files', 5), function (req, res, next) {
+app.post('/upload/multifile', upload.array('files', 5), (req, res, next) => {
     res.status(200).send(`Files Uploaded: ${req.files.length}` )
   })
 
@@ -96,15 +96,50 @@ app.post('/upload/multifile', upload.array('file', 10),(req, res, next) => {
   })
   ```
 
-  #### Post files to the endpoints 
-  In order to post files to our endpoints, we will need to either make a post request with Multipart as our body or alternatively, use a tool such as Postman or Insomnia
-  to build the post request without the need to set up a html form and so on.
-  Using Insomnia, make a POST request and set the body type to Multipart. Then add a property called file and set the value type as file. Now select a file to upload and make the post request.
+  ## Usage (Uploading Files)
+  In order to post files to our endpoints, we will need to either make a post request with Multipart as our body or alternatively, use a tool such as Postman or Insomnia to build the post request without the need to set up a html form and so on.
+  Using Insomnia, make a `POST` request and set the body type to Multipart. Then add a property called file and set the value type as file. Now select a file to upload and make the post request.
   
   #### Result
   ![Alt text](img/1.png?raw=true)
   #### Note
   The same process is followed for multiple files, only difference being that you add multiple file propertys to the body of your request
+
+  ## File storage.
+  After testing out the endpoints, your uploads directory will be populated with files however,these files are not readable. They are still valid files, we just didnt tell multer how we wanted the files to be stored.
+  A few small modifications to our current code base can fix this. Multer has a function called `diskStorage` which enables us to define the destination and file name as functions so that you can implement custom logic on how we want that to be handeled.
+  
+  ```
+    var storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, 'uploads/')
+    },
+    filename: function (req, file, cb) {
+      const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
+      cb(null, file.fieldname + '-' + uniqueSuffix)
+    }
+  })
+  var upload = multer({ storage: storage })
+  ```
+
+  This will send files to `/uploads` and each time , rename the file with a random name. Notice we are not saving the file extenson on the name such as `.png`,that is because we dont want the file to be accessable on the server. In a application situation, you might store the files metadata in a database and build the file on request once authorised to view with the original name and file extenson.
+
+  #### Result
+  ![Alt text](img/2.png?raw=true)
+
+  ## From Here?
+  From here, the application can be refined to:
+   - Connect to a cloud storage provider
+   - Serve as a file upload microservice to a bigger applicaion or API
+   - Build your very own dropbox
+
+   ### Things to add:
+    - Testing
+    - Docker Containerization
+    - Dynamic config environment for setting custom file sizes and storage restrictions
+    - Security and Rate Limiting
+    - UI
+
 
 
 
