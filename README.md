@@ -133,11 +133,12 @@ app.post('/upload/multifile', upload.array('file', 10),(req, res, next) => {
    - Serve as a file upload microservice to a bigger applicaion or API
    - Build your very own dropbox
 
-   ### Things to add:
+   ### Things to add
+   From here, the application can be improved by:
     - Testing
     - Docker Containerization
     - Dynamic config environment for setting custom file sizes and storage restrictions
-    - Security and Rate Limiting
+    - Security and rate limiting
     - UI
 
 
