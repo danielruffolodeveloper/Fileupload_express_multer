@@ -1,11 +1,11 @@
 # File Upload using Express.js and Multer
 An example of how to implement file upload using express.js endpoints and multer
 
-In this tutorial, We will look at how to build a file upload endpoint with Express.js. Fileupload is a important skill to learn as a web developer as it is a common feature in many applications built today. This endpoint can serve as a foundation to integrating with cloud providers such as GCP and AWS file upload services as this tutorial is very similar.
+In this tutorial, We will look at how to implement file upload with Express.js. Fileupload is a important skill to learn as a web developer as it is a common feature in many applications built today. 
 
 ## Getting Started.
 We first need to create a Node.js application. To do this, make a project folder and using terminal.
-run the command <strong>npm init </strong> and follow the prompts. Make sure you point your file to server.js
+run the command <strong>npm init </strong> and follow the prompts. Make sure you point your file to server.js.
 
 We then need to install some dependencies using the npm package manager.These are:
 - Express
@@ -35,12 +35,10 @@ Our <strong>package.json</strong> file should now look something like this:
 You can go ahead and modify the package.json to suit your needs. For example, you might like to add a test script or a start script that runs nodemon,just run npm install to make the changes permanent and install any dependencies added.
 
 ## Setting up Express Server
-
-This part is extremely easy and thats because express.js website is very informative and they provide easy examples to get started.
-For our application, we basically take the express template (here) and modify it to have 2 endpoints which are /upload/singlefile and /upload/multifile which respectfully is for uploading a single file or uploading an array of files.
+For our application, we will use the express template (here) and modify it to have 2 endpoints which are `/upload/singlefile` and `/upload/multifile` which respectfully is for uploading a single file or uploading an array of files.
 
 ### Multer Package
-If you look closely at the endpoint, you will notice a methhod defined within the endpoint called `upload.single` and `upload.multiple`.  this is what calls the multer packages functions every time we request a endpoint and you will see that we told multer to send files to a destination of 'uploads/'. Multer is then responsible for sanatising the file and moving the file from the request body into our directory.
+If you look closely at the endpoint, You will notice a method defined within the endpoint called `upload.single` and `upload.multiple`.  this is what calls the multer package every time we request a endpoint and you will see that we told multer to send files to a destination of 'uploads/' in the multer declaration. Multer is then responsible for moving the file from the request body into our defined uploads directory.
 
 #### Code (Server.js)
 ```
