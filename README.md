@@ -3,13 +3,20 @@ An example of how to implement file upload using Express.js and Multer
 
 In this tutorial, We will implement file upload with Express.js and Multer. Fileupload is a important skill to learn as a web developer as it is a common feature in many applications built today. 
 
-## Prerequisites:
+## Requirements:
  - npm package manager
  - node.js 
  - vscode or other
  - Postman or insomnia
 
-## Getting Started.
+ ## To run application:
+  - Clone this repository
+  - Navigate into the directory using terminal
+  - Run `npm install` to install project dependencies
+  - Run `mkdir uploads` (Directory for uploads)
+  - Run `node server.js` (Application is running on port 5000)
+
+## Tutorial - Getting Started.
 We first need to create a Node.js application. To do this, make a project folder and navigate into that directory using terminal.
 Run the command <strong>npm init</strong> and follow the prompts. Make sure you point your file to server.js.
 
@@ -127,7 +134,7 @@ app.post('/upload/multifile', upload.array('file', 10),(req, res, next) => {
   var upload = multer({ storage: storage })
   ```
 
-  This will send files to `/uploads` and each time , rename the file with a random name. Notice we are not saving the file extention on the name such as `.png`,that is because we dont want the file to be readable on the server. In a application situation, you might store the files metadata in a database and build the file on request once authorised to view with the original name and file extenson.
+  This will send files to `/uploads` and each time , rename the file with a random name. Notice we are not saving the file extention on the name such as `.png`,that is because we dont want the file to be readablex1x1 on the server. In a application situation, you might store the files metadata in a database and build the file on request once authorised to view with the original name and file extenson.
 
   #### Result
   ![Alt text](img/2.png?raw=true)
